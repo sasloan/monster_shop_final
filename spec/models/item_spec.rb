@@ -13,6 +13,8 @@ RSpec.describe Item, type: :model do
     it {should have_many :reviews}
     it {should have_many :item_orders}
     it {should have_many(:orders).through(:item_orders)}
+		it {should have_many :item_bulk_discounts}
+		it {should have_many(:bulk_discounts).through(:item_bulk_discounts)}
   end
 
   describe "Instance methods" do
@@ -107,7 +109,7 @@ RSpec.describe Item, type: :model do
     end
 
     it '.quantity_by_order' do
-      expect(@tire.quantity_by_order(@order1.id)).to eq(11) 
+      expect(@tire.quantity_by_order(@order1.id)).to eq(11)
     end
 
     it '.subtotal' do
