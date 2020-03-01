@@ -26,15 +26,15 @@ RSpec.describe 'As a Merchant Employee' do
 		it 'I should see the names of all my bulk discounts and the percentage off it offers' do
 
 			within "#bulk_discount-#{@twenty_off.id}" do
-				expect(page).to have_content(@twenty_off.name)
+				expect(page).to have_link(@twenty_off.name)
 			end
 
 			within "#bulk_discount-#{@fifty_off.id}" do
-				expect(page).to have_content(@fifty_off.name)
+				expect(page).to have_link(@fifty_off.name)
 			end
 
 			within "#bulk_discount-#{@seventy_five_off.id}" do
-				expect(page).to have_content(@seventy_five_off.name)
+				expect(page).to have_link(@seventy_five_off.name)
 			end
 
 		end
