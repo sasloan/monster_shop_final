@@ -4,7 +4,8 @@
 
 <% @bulk_discounts.each do |bulk_discount| %>
 	<section id='bulk_discount-<%= bulk_discount.id %>'>
-		<%= link_to bulk_discount.name, "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %>
-		<%= number_to_percentage(bulk_discount.percentage_off).round(0) %>
+		<p>Bulk Discount Name: <%= link_to bulk_discount.name, "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %></p>
+		<p>Bulk Discount Percentage Off: <%= bulk_discount.percentage_off %>%</p>
+		<p>Bulk Discount Required Item Count: <%= bulk_discount.required_quantity %></p>
 	</section>
 <% end %>

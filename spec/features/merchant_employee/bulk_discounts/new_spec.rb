@@ -38,7 +38,7 @@ RSpec.describe 'As a Merchant Employee' do
 			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
 
 			expect(page).to have_link("30% OFF")
-			expect(page).to have_content(0.30)
+			expect(page).to have_content(0.3)
 			expect(page).to have_content(20)
 		end
 
