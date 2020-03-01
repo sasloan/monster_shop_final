@@ -49,7 +49,7 @@ RSpec.describe 'As a Merchant Employee' do
 
 			click_on "Create Bulk Discount"
 
-			expect(page).to have_content("Name cannot be blank.")
+			expect(page).to have_content("Name can't be blank")
 		end
 	end
 end
