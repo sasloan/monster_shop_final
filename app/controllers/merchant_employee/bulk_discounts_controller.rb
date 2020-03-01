@@ -46,6 +46,15 @@ class MerchantEmployee::BulkDiscountsController < MerchantEmployee::BaseControll
 		end
 	end
 
+	def destroy
+		@bulk_discount = BulkDiscount.find(params[:id])
+		@merchant = @bulk_discount.merchant
+		@bulk_discount.destroy
+
+		flash[:notice] = "#{@bulk_discount.name} has been deleted."
+		redirect_to "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts"
+	end
+
 	private
 
 	def bulk_discount_params

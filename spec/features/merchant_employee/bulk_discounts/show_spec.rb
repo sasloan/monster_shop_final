@@ -61,7 +61,6 @@ RSpec.describe 'As a Merchant Employee' do
 				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
 
 				expect(page).not_to have_content(@twenty_off.id.to_s)
-				expect(page).not_to have_content(@twenty_off.name)
 				expect(page).not_to have_content(@twenty_off.percentage_off)
 				expect(page).not_to have_content(@twenty_off.required_quantity)
 
