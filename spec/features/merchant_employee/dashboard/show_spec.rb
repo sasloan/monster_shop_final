@@ -77,5 +77,14 @@ RSpec.describe 'As a Merchant Employee' do
 			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/items")
 			expect(current_path).not_to eq("/merchants/#{@brians_shop.id}/items")
 		end
+
+		it 'I see a button that takes me to my bulk discounts' do
+
+			expect(page).to have_button("Bulk Discounts")
+
+			click_on "Bulk Discounts"
+
+			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
+		end
 	end
 end

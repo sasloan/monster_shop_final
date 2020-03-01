@@ -1,0 +1,10 @@
+<h2> Bulk Discounts </h2>
+
+<p><%= link_to "New Bulk Discount", "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/new", method: :get %></p>
+
+<% @bulk_discounts.each do |bulk_discount| %>
+	<section id='bulk_discount-<%= bulk_discount.id %>'>
+		<%= link_to bulk_discount.name, "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{bulk_discount.id}" %>
+		<%= number_to_percentage(bulk_discount.percentage_off) %>
+	</section>
+<% end %>

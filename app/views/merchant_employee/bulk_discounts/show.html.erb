@@ -1,0 +1,6 @@
+<h2><%= @bulk_discount.name %></h2>
+	<h4>Percentage Off as Decimal: <%= @bulk_discount.percentage_off %></h4>
+	<h4>Required item Quantity for Discount: <%= @bulk_discount.required_quantity %></h4>
+
+<p><%= link_to "Edit", "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}/edit" %> |
+	 <%= link_to "Delete", "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}", method: :delete %></p>

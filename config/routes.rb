@@ -61,6 +61,13 @@ Rails.application.routes.draw do
 		patch '/merchants/:id/items/:id/update', to: 'item_status#update'
     delete '/merchants/:id/items/:id', to: 'items#destroy'
     patch '/orders/:id', to: 'item_orders#update'
+		get '/merchants/:id/bulk_discounts', to: 'bulk_discounts#index'
+		get '/merchants/:id/bulk_discounts/new', to: 'bulk_discounts#new'
+		post '/merchants/:id/bulk_discounts', to: 'bulk_discounts#create'
+		get '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#show'
+		get '/merchants/:id/bulk_discounts/:id/edit', to: 'bulk_discounts#edit'
+		patch '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#update'
+		delete '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#destroy'
   end
 
 	# Admin
