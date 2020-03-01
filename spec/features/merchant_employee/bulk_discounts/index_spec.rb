@@ -9,7 +9,7 @@ RSpec.describe 'As a Merchant Employee' do
 			@brian = @brians_shop.users.create!(name: "Brian", address: "456 merchant ave.", city: "City of Townsville", state: "Nv", zip: "39433", email: "brian@gmail.com", password: "merchant", role:1)
 			@twenty_off = @megs_shop.bulk_discounts.create!(name: "20% OFF", percentage_off: 0.20, required_quantity: 10)
 			@fifty_off = @megs_shop.bulk_discounts.create!(name: "50% OFF", percentage_off: 0.50, required_quantity: 20)
-			@seventy_five_off = @brians_shop.bulk_discounts.create!(name: "75% OFF", percentage_off: 0.75, required_quantity: 30)
+			@seventy_five_off = @megs_shop.bulk_discounts.create!(name: "75% OFF", percentage_off: 0.75, required_quantity: 30)
 			@twenty_five_off = @brians_shop.bulk_discounts.create!(name: "25% OFF", percentage_off: 0.25, required_quantity: 15)
 			@fifty_five_off = @brians_shop.bulk_discounts.create!(name: "55% OFF", percentage_off: 0.55, required_quantity: 25)
 			@eighty_off = @brians_shop.bulk_discounts.create!(name: "80% OFF", percentage_off: 0.80, required_quantity: 35)
@@ -20,7 +20,7 @@ RSpec.describe 'As a Merchant Employee' do
 
 			click_on "Bulk Discounts"
 
-			expect(current_path).to eq("/merchant_employee/bulk_discounts")
+			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
 		end
 
 		it 'I should see the names of all my bulk discounts and the percentage off it offers' do

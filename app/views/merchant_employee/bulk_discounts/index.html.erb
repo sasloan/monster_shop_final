@@ -1,0 +1,8 @@
+<h2> Bulk Discounts </h2>
+
+<% @bulk_discounts.each do |bulk_discount| %>
+	<section id='bulk_discount-<%= bulk_discount.id %>'>
+		<%= bulk_discount.name %>
+		<%= number_to_percentage(bulk_discount.percentage_off) %>
+	</section>
+<% end %>
