@@ -27,6 +27,25 @@ class MerchantEmployee::BulkDiscountsController < MerchantEmployee::BaseControll
 		end
 	end
 
+	def edit
+		@bulk_discount = BulkDiscount.find(params[:id])
+		@merchant = @bulk_discount.merchant
+	end
+
+	def update
+		@bulk_discount = BulkDiscount.find(params[:id])
+		@merchant = @bulk_discount.merchant
+		@bulk_discount.update(bulk_discount_params)
+
+		if @bulk_discount.save
+			flash[:success] = "#{@bulk_discount.name} has been updated!"
+			redirect_to "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}"
+		else
+			flash[:notice] = @bulk_discount.errors.full_messages.to_sentence
+			render :new
+		end
+	end
+
 	private
 
 	def bulk_discount_params

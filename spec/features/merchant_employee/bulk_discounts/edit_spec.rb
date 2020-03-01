@@ -26,9 +26,9 @@ RSpec.describe 'As a Merchant Employee' do
 				expect(page).to have_content("Percentage off")
 				expect(page).to have_content("Required quantity")
 
-				expect(page).to have_content(@twenty_off.name)
-				expect(page).to have_content(@twenty_off.percentage_off)
-				expect(page).to have_content(@twenty_off.required_quantity)
+				expect(find_field('Name').value).to eq "20% OFF"
+				expect(find_field('Percentage off').value).to eq "0.2"
+				expect(find_field('Required quantity').value).to eq "10"
 
 				expect(page).to have_button("Submit")
 			end
@@ -42,6 +42,7 @@ RSpec.describe 'As a Merchant Employee' do
 				click_on "Submit"
 
 				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}")
+
 
 				expect(page).to have_content("30% OFF")
 				expect(page).to have_content(0.30)
@@ -65,7 +66,7 @@ RSpec.describe 'As a Merchant Employee' do
 				expect(page).not_to have_content("20% OFF")
 				expect(page).not_to have_content(0.20)
 				expect(page).not_to have_content(10)
-			end			
+			end
 		end
 	end
 end

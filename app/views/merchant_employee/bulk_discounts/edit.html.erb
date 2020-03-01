@@ -1,0 +1,11 @@
+<h2> Edit <%= @bulk_discount.name %></h2>
+
+<center>
+  <%= render partial: 'form', locals:{path: "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts/#{@bulk_discount.id}",
+																			method: :patch,
+																			button_text: 'Submit',
+																			name: "#{@bulk_discount.name}",
+																			percentage_off: "#{@bulk_discount.percentage_off}",
+																			required_quantity: "#{@bulk_discount.required_quantity}"
+																			} %>
+</center>
