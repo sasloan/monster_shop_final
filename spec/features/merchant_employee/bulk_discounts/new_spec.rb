@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe 'As a Merchant Employee' do
-	describe 'When I visit the Bulk Discounts Index page' do
+	describe 'When I am taken to the New form for Bulk Discounts' do
 		before :each do
 			@megs_shop = Merchant.create!(name: "Meg's Dog Shop", address: '123 Dog Rd.', city: 'Hershey', state: 'PA', zip: 80203)
 			@brians_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
@@ -16,44 +16,40 @@ RSpec.describe 'As a Merchant Employee' do
 
 			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@meg)
 
-			visit "/merchant_employee/dashboard"
-
-			click_on "Bulk Discounts"
-
-			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
-		end
-
-		it 'I should see the names of all my bulk discounts and the percentage off it offers' do
-
-			within "#bulk_discount-#{@twenty_off.id}" do
-				expect(page).to have_link(@twenty_off.name)
-			end
-
-			within "#bulk_discount-#{@fifty_off.id}" do
-				expect(page).to have_link(@fifty_off.name)
-			end
-
-			within "#bulk_discount-#{@seventy_five_off.id}" do
-				expect(page).to have_link(@seventy_five_off.name)
-			end
-
-		end
-
-		it 'I should not see the bulk discounts of other merchants, only my own' do
-
-			expect(page).not_to have_content(@twenty_five_off.name)
-			expect(page).not_to have_content(@fifty_five_off.name)
-			expect(page).not_to have_content(@eighty_off.name)
-
-		end
-
-		it 'I should see a link to add a new Bulk Discount to my Merchant' do
-
-			expect(page).to have_link("New Bulk Discount")
+			visit "/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts"
 
 			click_on "New Bulk Discount"
 
 			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/new")
+		end
+
+		it 'I see Name, Percentage_off and Required_Quantity that need to be filled in' do
+
+			expect(page).to have_content("Name")
+			expect(page).to have_content("Percentage off")
+			expect(page).to have_content("Required quantity")
+
+			fill_in :name, with: "30% OFF"
+			fill_in :percentage_off, with: 0.30
+			fill_in :required_quantity, with: 20
+
+			click_on "Create Bulk Discount"
+
+			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
+
+			expect(page).to have_link("30% OFF")
+			expect(page).to have_content(0.30)
+			expect(page).to have_content(20)
+		end
+
+		it 'I see the three options but if I fill one out wrong then I am redirected back and see a flash message' do
+
+			fill_in :percentage_off, with: 0.30
+			fill_in :required_quantity, with: 20
+
+			click_on "Create Bulk Discount"
+
+			expect(page).to have_content("Name cannot be blank.")
 		end
 	end
 end
