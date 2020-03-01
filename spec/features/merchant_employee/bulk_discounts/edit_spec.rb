@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe 'As a Merchant Employee' do
-	describe 'I can click on the name of any of my bulk discounts In their index page' do
-		describe 'Then I am transferred to their show page.' do
+	describe 'When I click on the Edit button on the bulk discounts show page' do
+		describe 'I am sent to an edit page where.' do
 			before :each do
 				@megs_shop = Merchant.create!(name: "Meg's Dog Shop", address: '123 Dog Rd.', city: 'Hershey', state: 'PA', zip: 80203)
 				@brians_shop = Merchant.create!(name: "Brian's Dog Shop", address: '125 Doggo St.', city: 'Denver', state: 'CO', zip: 80210)
@@ -17,37 +17,55 @@ RSpec.describe 'As a Merchant Employee' do
 
 				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@meg)
 
-				visit "/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts"
-
-				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts")
-
-				click_on "#{@twenty_off.name}"
-
-				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}")
+				visit "/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}/edit"
 			end
 
-			it 'Where I see the name, percentage_off and required_quantity of this discount' do
+			it 'I see a form that is pre populated with the bulk discounts current information' do
+
+				expect(page).to have_content("Name")
+				expect(page).to have_content("Percentage off")
+				expect(page).to have_content("Required quantity")
 
 				expect(page).to have_content(@twenty_off.name)
 				expect(page).to have_content(@twenty_off.percentage_off)
 				expect(page).to have_content(@twenty_off.required_quantity)
+
+				expect(page).to have_button("Submit")
 			end
 
-			it 'Where I do not expect to see the name, percentage_off and required_quantity of any other bulk discount than the one I clicked on' do
+			it 'I can then change the infromation in the boxes to whatever I desire' do
 
-				expect(page).not_to have_content(@twenty_five_off.name)
-				expect(page).not_to have_content(@twenty_five_off.percentage_off)
-				expect(page).not_to have_content(@twenty_five_off.required_quantity)
+				fill_in :name, with: "30% OFF"
+				fill_in :percentage_off, with: 0.30
+				fill_in :required_quantity, with: 15
+
+				click_on "Submit"
+
+				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}")
+
+				expect(page).to have_content("30% OFF")
+				expect(page).to have_content(0.30)
+				expect(page).to have_content(15)
 			end
 
-			it 'Where I see a button to edit the current bulk discount' do
+			it 'After I submit an Edit I do not see the previouse infromation' do
 
-				expect(page).to have_link("Edit")
+				fill_in :name, with: "30% OFF"
+				fill_in :percentage_off, with: 0.30
+				fill_in :required_quantity, with: 15
 
-				click_on "Edit"
+				click_on "Submit"
 
-				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}/edit")
-			end
+				expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/bulk_discounts/#{@twenty_off.id}")
+
+				expect(page).to have_content("30% OFF")
+				expect(page).to have_content(0.30)
+				expect(page).to have_content(15)
+
+				expect(page).not_to have_content("20% OFF")
+				expect(page).not_to have_content(0.20)
+				expect(page).not_to have_content(10)
+			end			
 		end
 	end
 end
