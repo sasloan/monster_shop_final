@@ -6,8 +6,7 @@ class Item < ApplicationRecord
   has_many :reviews, dependent: :destroy
   has_many :item_orders
   has_many :orders, through: :item_orders
-	has_many :item_bulk_discounts
-	has_many :bulk_discounts, through: :item_bulk_discounts
+
 
   def average_review
     reviews.average(:rating)

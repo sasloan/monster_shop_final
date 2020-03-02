@@ -13,8 +13,6 @@ RSpec.describe Item, type: :model do
     it {should have_many :reviews}
     it {should have_many :item_orders}
     it {should have_many(:orders).through(:item_orders)}
-		it {should have_many :item_bulk_discounts}
-		it {should have_many(:bulk_discounts).through(:item_bulk_discounts)}
   end
 
   describe "Instance methods" do

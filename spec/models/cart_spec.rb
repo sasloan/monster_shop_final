@@ -7,6 +7,9 @@ RSpec.describe Cart do
 		  @mike = Merchant.create(name: "Mike's Print Shop", address: '123 Paper Rd.', city: 'Denver', state: 'CO', zip: 80203)
 			@paper = @mike.items.create(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 25)
 	    @pencil = @mike.items.create(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
+			@twenty_off = @mike.bulk_discounts.create!(name: "20% OFF", percentage_off: 0.20, required_quantity: 10)
+			@fifty_off = @mike.bulk_discounts.create!(name: "50% OFF", percentage_off: 0.50, required_quantity: 20)
+			@seventy_five_off = @mike.bulk_discounts.create!(name: "75% OFF", percentage_off: 0.75, required_quantity: 15)
 			@cart ||= Cart.new(Hash.new(0))
 			@cart.add_item(@paper.id.to_s)
 		end
