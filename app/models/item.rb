@@ -45,4 +45,14 @@ class Item < ApplicationRecord
   def subtotal(order_id)
     quantity_by_order(order_id) * price
   end
+
+	def able?(qty)
+		merchant.bulk_discounts.map do |bulk_discount|
+			if (bulk_discount.required_quantity) == qty
+				 true
+			else
+				 false
+			end
+		end.first
+	end
 end

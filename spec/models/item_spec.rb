@@ -29,6 +29,9 @@ RSpec.describe Item, type: :model do
       @review_3 = @chain.reviews.create!(title: "Meh place", content: "They have meh bike stuff and I probably won't come back", rating: 1)
       @review_4 = @chain.reviews.create!(title: "Not too impressed", content: "v basic bike shop", rating: 2)
       @review_5 = @chain.reviews.create!(title: "Okay place :/", content: "Brian's cool and all but just an okay selection of items", rating: 3)
+
+			@twenty_off = @bike_shop.bulk_discounts.create!(name: "20% OFF", percentage_off: 0.20, required_quantity: 10)
+
     end
 
     it ".calculate_average_review" do
@@ -60,6 +63,11 @@ RSpec.describe Item, type: :model do
       order.item_orders.create!(item: chain, price: chain.price, quantity: 2)
       expect(chain.no_orders?).to eq(false)
     end
+
+		it '.able?' do
+			expect(@chain.able?(10)).to eq(true)
+			expect(@chain.able?(9)).to eq(false)
+		end
 	end
 
   describe "class methods" do
@@ -95,6 +103,8 @@ RSpec.describe Item, type: :model do
       @order1.item_orders.create!(item: @dog_food, price: @dog_food.price, quantity: 3)
       @order1.item_orders.create!(item: @bed, price: @bed.price, quantity: 4)
       @order1.item_orders.create!(item: @carrier, price: @carrier.price, quantity: 5)
+
+
 
     end
 
