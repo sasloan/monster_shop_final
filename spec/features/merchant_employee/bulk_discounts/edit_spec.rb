@@ -67,6 +67,17 @@ RSpec.describe 'As a Merchant Employee' do
 				expect(page).not_to have_content(0.20)
 				expect(page).not_to have_content(10)
 			end
+
+			it 'If I do not fill in all the information I am redirected back to the form to fix my error and see a flash message telling me my error' do
+
+				fill_in :name, with: ""
+				fill_in :percentage_off, with: 0.30
+				fill_in :required_quantity, with: 15
+
+				click_on "Submit"
+
+				expect(page).to have_content("Name can't be blank")
+			end
 		end
 	end
 end
