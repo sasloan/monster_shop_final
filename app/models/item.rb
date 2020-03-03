@@ -55,4 +55,12 @@ class Item < ApplicationRecord
 			end
 		end.first
 	end
+
+	def discount_calculator(qty)
+		merchant.bulk_discounts.map do |bulk_discount|
+			if able?(qty)
+				price - (price * bulk_discount.percentage_off)
+			end
+		end.first.to_i
+	end
 end

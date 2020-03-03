@@ -12,6 +12,10 @@ RSpec.describe Cart do
 			@seventy_five_off = @mike.bulk_discounts.create!(name: "75% OFF", percentage_off: 0.75, required_quantity: 15)
 			@cart ||= Cart.new(Hash.new(0))
 			@cart.add_item(@paper.id.to_s)
+
+			10.times do
+				@cart.add_item(@pencil.id.to_s)
+			end
 		end
 
     it ".add_item" do
@@ -32,6 +36,7 @@ RSpec.describe Cart do
 
 		it ".subtotal" do
 			expect(@cart.subtotal(@paper)).to eq(20)
+			expect(@cart.subtotal(@pencil)).to eq(16)
 		end
 
 		it ".total" do
