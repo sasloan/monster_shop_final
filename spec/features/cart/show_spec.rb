@@ -57,7 +57,7 @@ RSpec.describe 'As a User' do
 
         within "#cart-item-#{@pencil.id}" do
           expect(page).to have_content("2")
-          expect(page).to have_content("$4")
+          expect(page).to have_content("$2")
         end
 
         expect(page).to have_content("Total: $124")

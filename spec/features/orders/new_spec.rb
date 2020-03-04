@@ -41,7 +41,7 @@ RSpec.describe 'As a User' do
         expect(page).to have_link("#{@paper.merchant.name}")
         expect(page).to have_content("$#{@paper.price}")
         expect(page).to have_content("2")
-        expect(page).to have_content("$40")
+        expect(page).to have_content("$20")
       end
 
       within "#order-item-#{@pencil.id}" do
