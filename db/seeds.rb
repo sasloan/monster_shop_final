@@ -33,3 +33,11 @@ Order.destroy_all
 @order_1.item_orders.create!(item: @paw_pads, price: @paw_pads.price, quantity: 8)
 @order_1.item_orders.create!(item: @rope, price: @rope.price, quantity: 5)
 @order_1.item_orders.create!(item: @ball, price: @ball.price, quantity: 10)
+
+# bulk_discounts
+
+@twenty_off = @megs_shop.bulk_discounts.create!(name: "20% OFF", percentage_off: 0.20, required_quantity: 10)
+@fifty_off = @megs_shop.bulk_discounts.create!(name: "50% OFF", percentage_off: 0.50, required_quantity: 20)
+@seventy_five_off = @megs_shop.bulk_discounts.create!(name: "75% OFF", percentage_off: 0.75, required_quantity: 15)
+@twenty_five_off = @brians_shop.bulk_discounts.create!(name: "25% OFF", percentage_off: 0.25, required_quantity: 15)
+@fifty_five_off = @brians_shop.bulk_discounts.create!(name: "55% OFF", percentage_off: 0.55, required_quantity: 25)

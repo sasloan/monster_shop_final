@@ -23,7 +23,11 @@ class Cart
   end
 
   def subtotal(item)
-    item.price * @contents[item.id.to_s]
+		if merchant_discount(item).compact != []
+			item.price * @contents[item.id.to_s] - ((item.price * @contents[item.id.to_s]) * best_discount(merchant_discount(item)))
+		else
+			item.price * @contents[item.id.to_s]
+		end
   end
 
   def total
@@ -47,5 +51,20 @@ class Cart
 
 	def quantity_zero?(item_id)
 		@contents[item_id] == 0
-	end	
+	end
+
+	def merchant_discount(item)
+  	item.merchant.bulk_discounts.map do |bulk_discount|
+    	if @contents[item.id.to_s] >= bulk_discount.required_quantity
+	  		bulk_discount
+			end
+		end.compact
+  end
+
+	def best_discount(discounts)
+  	percentage = discounts.map do |discount|
+    	discount.percentage_off
+  	end
+  	percentage.max
+	end
 end

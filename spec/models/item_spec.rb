@@ -65,15 +65,6 @@ RSpec.describe Item, type: :model do
       order.item_orders.create!(item: chain, price: chain.price, quantity: 2)
       expect(chain.no_orders?).to eq(false)
     end
-
-		it '.able?' do
-			expect(@chain.able?(10)).to eq(true)
-			expect(@chain.able?(9)).to eq(false)
-		end
-
-		it '.discount_calculator' do
-			expect(@tire.discount_calculator(10)).to eq(80)
-		end
 	end
 
   describe "class methods" do
