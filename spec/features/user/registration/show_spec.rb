@@ -4,7 +4,7 @@ RSpec.describe 'As a visitor' do
   describe 'I visit the Welcome page and see.' do
     it 'has a link to register' do
 
-      visit merchants_path
+      visit '/merchants'
 
       within 'nav' do
         click_on 'Register'
@@ -54,7 +54,7 @@ RSpec.describe 'As a visitor' do
 
     it 'I can save entries for an already entered email' do
 
-      visit merchants_path
+      visit '/merchants'
 
       within 'nav' do
         click_on 'Register'
