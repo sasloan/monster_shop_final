@@ -15,7 +15,7 @@ RSpec.describe 'As a User' do
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content('Email')
       expect(page).to have_content('Password')
@@ -38,7 +38,7 @@ RSpec.describe 'As a User' do
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       within '#log_in_form' do
         fill_in :email, with: @user.email
@@ -47,7 +47,7 @@ RSpec.describe 'As a User' do
         click_on 'Log In'
       end
 
-      visit '/login'
+      visit new_session_path
       expect(current_path).to eq('/user/profile')
 
       expect(page).to have_content("You are already logged in as User, to log out please select 'Log Out' at the top of your page.")
@@ -62,7 +62,7 @@ RSpec.describe 'As a User' do
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content('Email')
       expect(page).to have_content('Password')
@@ -75,7 +75,6 @@ RSpec.describe 'As a User' do
       end
 
       expect(page).to have_content('Your Log in attempt failed, Wrong email or password')
-      expect(current_path).to eq('/login')
     end
   end
 end
@@ -97,7 +96,7 @@ describe 'As a Merchant' do
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -120,7 +119,7 @@ describe 'As a Merchant' do
 
   		click_on "Log In"
 
-  		expect(current_path).to eq('/login')
+  		expect(current_path).to eq(new_session_path)
 
   		within '#log_in_form' do
     		fill_in :email, with: @merchant.email
@@ -129,7 +128,7 @@ describe 'As a Merchant' do
     		click_on 'Log In'
   		end
 
-      visit '/login'
+      visit new_session_path
       expect(current_path).to eq("/merchant_employee/dashboard")
 
   		expect(page).to have_content("You are already logged in as Merchant, to log out please select 'Log Out' at the top of your page.")
@@ -145,7 +144,7 @@ describe 'As a Merchant' do
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -158,7 +157,6 @@ describe 'As a Merchant' do
       end
 
       expect(page).to have_content("Your Log in attempt failed, Wrong email or password")
-      expect(current_path).to eq("/login")
     end
   end
 end
@@ -179,7 +177,7 @@ describe 'As a Admin' do
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -201,7 +199,7 @@ describe 'As a Admin' do
 
       click_on "Log In"
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       within '#log_in_form' do
         fill_in :email, with: @admin.email
@@ -210,7 +208,7 @@ describe 'As a Admin' do
         click_on 'Log In'
       end
 
-      visit '/login'
+      visit new_session_path
 
       expect(current_path).to eq("/admin/dashboard")
 
@@ -227,7 +225,7 @@ describe 'As a Admin' do
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -240,7 +238,6 @@ describe 'As a Admin' do
       end
 
       expect(page).to have_content("Your Log in attempt failed, Wrong email or password")
-      expect(current_path).to eq("/login")
     end
   end
 end

@@ -95,7 +95,7 @@ RSpec.describe 'As a User' do
 
 				click_link "log in"
 
-				expect(current_path).to eq('/login')
+				expect(current_path).to eq(new_session_path)
 			end
 
 			it 'If logged in as a user I can checkout' do

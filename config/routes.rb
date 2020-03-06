@@ -1,16 +1,14 @@
 Rails.application.routes.draw do
 	# Welcome Page
-
   root 'welcome#show'
-
-
   # get '/', to: 'welcome#show'
   # get root_path, to: 'welcome#show'
 
 	# User Session
-  get '/login', to: 'sessions#new'
-  post '/login', to: 'sessions#create'
-  delete '/logout', to: 'sessions#destroy'
+	resources :sessions, only: [:create, :new, :destroy]
+  # get '/login', to: 'sessions#new'
+  # post '/login', to: 'sessions#create'
+  # delete '/logout', to: 'sessions#destroy'
 
 	# Merchants
   resources :merchants

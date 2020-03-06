@@ -1,4 +1,4 @@
-<%= form_tag "/login", method: :post do %>
+<%= form_tag sessions_path, method: :post do %>
 	<section id='log_in_form'>
 		<%= label_tag :email %>
 		<%= text_field_tag :email %>
@@ -9,4 +9,3 @@
 		<%= submit_tag "Log In" %>
 	</section>
 <% end %>
-
