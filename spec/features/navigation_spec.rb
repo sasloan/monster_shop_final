@@ -21,7 +21,7 @@ RSpec.describe 'Site Navigation' do
         click_link 'Home'
       end
 
-      expect(current_path).to eq('/')
+      expect(current_path).to eq(root_path)
     end
 
     it 'I can see a cart indicator on all pages' do
@@ -68,7 +68,7 @@ RSpec.describe 'Site Navigation' do
         click_link 'Log Out'
       end
       expect(page).to have_content('You have been successfully logged out!!')
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
     end
 
     it "I can't access restricted user pages" do
@@ -105,7 +105,7 @@ RSpec.describe 'Site Navigation' do
       end
 
       expect(page).to have_content('You have been successfully logged out!!')
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
     end
 
     it "I can't access restricted user pages" do
@@ -150,7 +150,7 @@ RSpec.describe 'Site Navigation' do
       end
 
       expect(page).to have_content('You have been successfully logged out!!')
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
     end
 
     it "can't access /merchant or /cart stuff" do

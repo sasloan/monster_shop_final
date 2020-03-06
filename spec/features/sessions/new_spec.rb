@@ -7,9 +7,9 @@ RSpec.describe 'As a User' do
     end
 
     it 'when I click that link I am taken to a log in form to log in' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link('Log In')
 
@@ -32,9 +32,9 @@ RSpec.describe 'As a User' do
     end
 
     it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the profile page' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       click_on 'Log In'
 
@@ -54,9 +54,9 @@ RSpec.describe 'As a User' do
     end
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link('Log In')
 
@@ -89,9 +89,9 @@ describe 'As a Merchant' do
 
     it 'when I click that link I am taken to a log in form to log in' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
@@ -114,9 +114,9 @@ describe 'As a Merchant' do
 
 		it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the dahsboard page' do
 
-  		visit '/welcome'
+  		visit root_path
 
-  		expect(current_path).to eq('/welcome')
+  		expect(current_path).to eq(root_path)
 
   		click_on "Log In"
 
@@ -137,9 +137,9 @@ describe 'As a Merchant' do
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
@@ -171,9 +171,9 @@ describe 'As a Admin' do
 
     it 'when I click that link I am taken to a log in form to log in' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
@@ -195,9 +195,9 @@ describe 'As a Admin' do
     end
 
     it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the dashboard page' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       click_on "Log In"
 
@@ -219,9 +219,9 @@ describe 'As a Admin' do
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 

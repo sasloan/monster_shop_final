@@ -39,6 +39,6 @@ class SessionsController < ApplicationController
     session.delete(:user_id)
     session.delete(:cart)
     flash[:success] = 'You have been successfully logged out!!'
-    redirect_to '/welcome'
+    redirect_to root_path
   end
 end

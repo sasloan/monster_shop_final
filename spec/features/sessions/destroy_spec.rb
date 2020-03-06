@@ -17,7 +17,7 @@ RSpec.describe 'As a User' do
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end
@@ -41,7 +41,7 @@ describe 'As a Merchant' do
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end
@@ -64,7 +64,7 @@ describe 'As a Admin' do
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end
