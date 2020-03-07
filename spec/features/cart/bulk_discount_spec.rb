@@ -21,32 +21,32 @@ RSpec.describe 'As a User' do
 				@user = User.create(name: 'Steve', address: '123 Street Road', city: 'City Name', state: 'CO', zip: 12345, email: 'example@example.com', password: 'password1', role: 0)
 
 				10.times do
-					visit item_path(@paper)
+					visit "/items/#{@paper.id}"
 					click_on "Add To Cart"
 				end
 
 				20.times do
-					visit item_path(@tire)
+					visit "/items/#{@tire.id}"
 					click_on "Add To Cart"
 				end
 
 				15.times do
-					visit item_path(@pencil)
+					visit "/items/#{@pencil.id}"
 					click_on "Add To Cart"
 				end
 
 				15.times do
-					visit item_path(@chain)
+					visit "/items/#{@chain.id}"
 					click_on "Add To Cart"
 				end
 
 				25.times do
-					visit item_path(@shifter)
+					visit "/items/#{@shifter.id}"
 					click_on "Add To Cart"
 				end
 
 				5.times do
-					visit item_path(@notebook)
+					visit "/items/#{@notebook.id}"
 					click_on "Add To Cart"
 				end
 

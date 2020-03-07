@@ -101,13 +101,13 @@ RSpec.describe 'As a User' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit item_path(paper)
+      visit "/items/#{paper.id}"
       click_on "Add To Cart"
-      visit item_path(paper)
+      visit "/items/#{paper.id}"
       click_on "Add To Cart"
-      visit item_path(tire)
+      visit "/items/#{tire.id}"
       click_on "Add To Cart"
-      visit item_path(pencil)
+      visit "/items/#{pencil.id}"
       click_on "Add To Cart"
 
       visit "/cart"

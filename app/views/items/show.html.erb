@@ -1,4 +1,4 @@
-<h1><%= link_to @item.name, item_path(@item) %></h1>
+<h1><%= link_to @item.name, '/items/:id' %></h1>
 <p align="center">Sold by: <%=link_to @item.merchant.name, "/merchants/#{@item.merchant.id}" %> </p>
 <section align = "center" id = "average-rating">
   <p>Average Rating: <%= @item.average_review.round(2) %></p>

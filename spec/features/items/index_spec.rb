@@ -22,7 +22,7 @@ RSpec.describe "As a Visitor" do
     end
 
     it "I see that all items or merchant names are links" do
-      visit items_path
+      visit '/items'
 
       expect(page).to have_link(@tire.name)
       expect(page).to have_link(@tire.merchant.name)
@@ -31,18 +31,18 @@ RSpec.describe "As a Visitor" do
     end
 
     it "I see that all items images are links to its show page" do
-      visit items_path
+      visit '/items'
 
       within "#item-#{@pull_toy.id}" do
         find(:xpath, "//a/img[@alt='Tug toy dog pull 9010 2 800x800']/..").click
 
-        expect(current_path).to eq(item_path(@pull_toy))
+        expect(current_path).to eq("/items/#{@pull_toy.id}")
       end
     end
 
     it "I can see a list of all of the items except inactive items"do
 
-      visit items_path
+      visit '/items'
 
       within "#item-#{@tire.id}" do
         expect(page).to have_link(@tire.name)
@@ -77,57 +77,57 @@ RSpec.describe "As a Visitor" do
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
       11.times do
-        visit item_path(@tire)
+        visit "/items/#{@tire.id}"
         click_on "Add To Cart"
       end
 
     	10.times do
-      	visit item_path(@seat)
+      	visit "/items/#{@seat.id}"
       	click_on "Add To Cart"
     	end
 
     	9.times do
-      	visit item_path(@pump)
+      	visit "/items/#{@pump.id}"
       	click_on "Add To Cart"
     	end
 
     	8.times do
-      	visit item_path(@pedals)
+      	visit "/items/#{@pedals.id}"
       	click_on "Add To Cart"
     	end
 
     	7.times do
-      	visit item_path(@helmet)
+      	visit "/items/#{@helmet.id}"
       	click_on "Add To Cart"
     	end
 
       6.times do
-        visit item_path(@pull_toy)
+        visit "/items/#{@pull_toy.id}"
         click_on "Add To Cart"
       end
 
     	5.times do
-      	visit item_path(@bed)
+      	visit "/items/#{@bed.id}"
       	click_on "Add To Cart"
     	end
 
     	4.times do
-      	visit item_path(@carrier)
+      	visit "/items/#{@carrier.id}"
       	click_on "Add To Cart"
     	end
 
     	3.times do
-      	visit item_path(@dog_food)
+      	visit "/items/#{@dog_food.id}"
       	click_on "Add To Cart"
     	end
 
     	2.times do
-      	visit item_path(@collar)
+      	visit "/items/#{@collar.id}"
       	click_on "Add To Cart"
     	end
 
     	1.times do
-      	visit item_path(@brush)
+      	visit "/items/#{@brush.id}"
       	click_on "Add To Cart"
     	end
 
@@ -142,7 +142,7 @@ RSpec.describe "As a Visitor" do
 
     	click_on  'Create Order'
 
-    	visit items_path
+    	visit '/items'
 
     	within("#popular_items") do
       	expect(page).to have_content("Gatorskins: 11 Seat: 10 Pump: 9 Pedals: 8 Helmet: 7")

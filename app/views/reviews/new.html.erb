@@ -1,4 +1,4 @@
-<h1 align= "center">Create Review for <%= link_to @item.name, item_path(@item) %></h1>
+<h1 align= "center">Create Review for <%= link_to @item.name, '/items/:id' %></h1>
 <center>
   <%= render partial: 'form', locals:{path: "/items/#{@item.id}/reviews",
 																			method: :post,

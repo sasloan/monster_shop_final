@@ -10,7 +10,7 @@
   </tr>
   <% cart.items.each do |item, quantity| %>
     <tr id='order-item-<%= item.id%>'>
-      <td><p><%= link_to item.name, item_path(item) %><p></td>
+      <td><p><%= link_to item.name, '/items/:id' %><p></td>
       <td><p><%= number_to_currency(item.price) %></p></td>
       <td><p><%= quantity %></p></td>
       <td><p><%= number_to_currency(cart.subtotal(item)) %></p></td>
