@@ -48,8 +48,9 @@ Rails.application.routes.draw do
   get '/orders/:id', to: 'orders#show'
 
 	# Registration
-  get '/register', to: 'users#new'
-  post '/register', to: 'users#create'
+	resources :users, only: [:new, :create]
+  # get '/register', to: 'users#new'
+  # post '/register', to: 'users#create'
 
 	# User
   namespace :user do

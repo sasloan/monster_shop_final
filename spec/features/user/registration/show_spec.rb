@@ -10,12 +10,12 @@ RSpec.describe 'As a visitor' do
         click_on 'Register'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(new_user_path)
     end
 
     it 'I can fill in info about a user' do
 
-      visit '/register'
+      visit new_user_path
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'
@@ -36,7 +36,7 @@ RSpec.describe 'As a visitor' do
 
     it 'I cannot create a user without all information' do
 
-      visit '/register'
+      visit new_user_path
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'
@@ -48,7 +48,7 @@ RSpec.describe 'As a visitor' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(users_path)
       expect(page).to have_content("City can't be blank, State can't be blank")
     end
 
@@ -60,7 +60,7 @@ RSpec.describe 'As a visitor' do
         click_on 'Register'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(new_user_path)
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'

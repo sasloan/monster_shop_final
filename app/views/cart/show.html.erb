@@ -47,7 +47,7 @@
 	<% if !current_user %>
 		<p> You need to register or login to checkout </p>
 		<p><%= link_to "log in", new_session_path %></p>
-		<p><%= link_to "register", "/register" %></p>
+		<p><%= link_to "register", new_user_path %></p>
 	<% else %>
   		<p><%= link_to "Checkout", "/orders/new", method: :get %></p>
 	<% end %>

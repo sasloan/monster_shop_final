@@ -89,7 +89,7 @@ RSpec.describe 'As a User' do
 
 				click_link "register"
 
-				expect(current_path).to eq('/register')
+				expect(current_path).to eq(new_user_path)
 
 				visit '/cart'
 
