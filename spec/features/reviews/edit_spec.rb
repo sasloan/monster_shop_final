@@ -23,7 +23,7 @@ RSpec.describe 'As a User' do
         click_on "Edit"
       end
 
-      expect(current_path).to eq("/reviews/#{@review_1.id}/edit")
+      expect(current_path).to eq(edit_item_review_path(@chain.id, @review_1.id))
 
       expect(find_field(:title).value).to eq(@review_1.title)
       expect(find_field(:content).value).to eq(@review_1.content)
@@ -53,7 +53,7 @@ RSpec.describe 'As a User' do
         click_on "Edit"
       end
 
-			expect(current_path).to eq("/reviews/#{@review_1.id}/edit")
+			expect(current_path).to eq(edit_item_review_path(@chain.id, @review_1.id))
 
 			title = "Nice Bike Shop!"
 

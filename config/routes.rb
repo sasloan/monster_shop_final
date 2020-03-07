@@ -26,11 +26,14 @@ Rails.application.routes.draw do
   # resources :items, only: [:index, :show]
 
 	# Reviews
-  get '/items/:item_id/reviews/new', to: 'reviews#new'
-  post '/items/:item_id/reviews', to: 'reviews#create'
-  get '/reviews/:id/edit', to: 'reviews#edit'
-  patch '/reviews/:id', to: 'reviews#update'
-  delete '/reviews/:id', to: 'reviews#destroy'
+	resources :items, only: [:index, :show] do
+		resources :reviews, only: [:new, :create, :edit, :update, :destroy]
+	end
+  # get '/items/:item_id/reviews/new', to: 'reviews#new'
+  # post '/items/:item_id/reviews', to: 'reviews#create'
+  # get '/reviews/:id/edit', to: 'reviews#edit'
+  # patch '/reviews/:id', to: 'reviews#update'
+  # delete '/reviews/:id', to: 'reviews#destroy'
 
 	# Cart
   post '/cart/:item_id', to: 'cart#add_item'

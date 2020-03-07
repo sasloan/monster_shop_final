@@ -1,7 +1,7 @@
 <h1 align= "center">Edit Review for <%= link_to @review.item.name, "/items/#{@review.item.id}" %></h1>
 
 <center>
-  <%= render partial: 'form', locals:{path: "/reviews/#{@review.id}",
+  <%= render partial: 'form', locals:{path: item_review_path,
 																			method: :patch,
 																			button_text: "Update Review",
 																			title: "#{@review.title}",
