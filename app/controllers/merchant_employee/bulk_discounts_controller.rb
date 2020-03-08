@@ -1,7 +1,7 @@
 class MerchantEmployee::BulkDiscountsController < MerchantEmployee::BaseController
 
 	def index
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 		@bulk_discounts = @merchant.bulk_discounts.all
 	end
 
@@ -11,11 +11,11 @@ class MerchantEmployee::BulkDiscountsController < MerchantEmployee::BaseControll
 	end
 
 	def new
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 	end
 
 	def create
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 		@bulk_discount = @merchant.bulk_discounts.new(bulk_discount_params)
 
 		if @bulk_discount.save
