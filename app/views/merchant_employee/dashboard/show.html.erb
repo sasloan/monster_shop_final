@@ -7,7 +7,7 @@
 </section>
 
 <%= button_to "Bulk Discounts", "/merchant_employee/merchants/#{@merchant.id}/bulk_discounts", method: :get %>
-<%= link_to "Inventory", "/merchant_employee/merchants/#{@merchant.id}/items" %>
+<%= link_to "Inventory", merchant_employee_merchant_items_path(current_user.id, @merchant.id) %>
 
 <h4> Unfulfilled Orders </h4>
 

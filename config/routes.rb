@@ -74,22 +74,27 @@ Rails.application.routes.draw do
   namespace :merchant_employee do
     get '/dashboard', to: 'dashboard#show'
     get '/orders/:id', to: 'orders#show'
-		get '/merchants/:id/items', to: 'items#index'
-		get '/merchants/:id/items/new', to: 'items#new'
-		post '/merchants/:id/items', to: 'items#create'
-		get '/merchants/:id/items/:id', to: 'items#show'
-		get '/merchants/:id/items/:id/edit', to: 'items#edit'
-		patch '/merchants/:id/items/:id', to: 'items#update'
 		patch '/merchants/:id/items/:id/update', to: 'item_status#update'
-    delete '/merchants/:id/items/:id', to: 'items#destroy'
-    patch '/orders/:id', to: 'item_orders#update'
-		get '/merchants/:id/bulk_discounts', to: 'bulk_discounts#index'
-		get '/merchants/:id/bulk_discounts/new', to: 'bulk_discounts#new'
-		post '/merchants/:id/bulk_discounts', to: 'bulk_discounts#create'
-		get '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#show'
-		get '/merchants/:id/bulk_discounts/:id/edit', to: 'bulk_discounts#edit'
-		patch '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#update'
-		delete '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#destroy'
+		patch '/orders/:id', to: 'item_orders#update'
+		resources :merchants, only: [:show] do
+			resources :items
+			resources :bulk_discounts
+		end
+		#
+		# get '/merchants/:id/items', to: 'items#index'
+		# get '/merchants/:id/items/new', to: 'items#new'
+		# post '/merchants/:id/items', to: 'items#create'
+		# get '/merchants/:id/items/:id', to: 'items#show'
+		# get '/merchants/:id/items/:id/edit', to: 'items#edit'
+		# patch '/merchants/:id/items/:id', to: 'items#update'
+    # delete '/merchants/:id/items/:id', to: 'items#destroy'
+		# get '/merchants/:id/bulk_discounts', to: 'bulk_discounts#index'
+		# get '/merchants/:id/bulk_discounts/new', to: 'bulk_discounts#new'
+		# post '/merchants/:id/bulk_discounts', to: 'bulk_discounts#create'
+		# get '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#show'
+		# get '/merchants/:id/bulk_discounts/:id/edit', to: 'bulk_discounts#edit'
+		# patch '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#update'
+		# delete '/merchants/:id/bulk_discounts/:id', to: 'bulk_discounts#destroy'
   end
 
 	# Admin

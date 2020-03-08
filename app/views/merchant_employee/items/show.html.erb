@@ -1,4 +1,4 @@
-<h1><%= link_to @item.name, "/merchant_employee/merchants/#{@merchant.id}/items/#{@item.id}" %></h1>
+<h1><%= link_to @item.name, merchant_employee_merchant_item_path(@merchant.id, @item.id) %></h1>
 <p align="center">Sold by: <%=link_to @item.merchant.name, "/merchants/#{@item.merchant.id}" %> </p>
 <section align = "center" id = "average-rating">
   <p>Average Rating: <%= @item.average_review %></p>
@@ -18,12 +18,12 @@
         <p style= "color:red">Inactive</p>
       <% end %>
 			<% if @item.no_orders? %>
-      <p><%= link_to "Edit Item", "/merchant_employee/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
-      <p><%= link_to "Delete Item", "/merchant_employee/merchants/#{@merchant.id}/items/#{@item.id}", method: :delete %></p>
+      <p><%= link_to "Edit Item", edit_merchant_employee_merchant_item_path(@merchant.id, @item.id) %></p>
+      <p><%= link_to "Delete Item", merchant_employee_merchant_item_path(@merchant.id, @item.id), method: :delete %></p>
 			<%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
 			<%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
 			<% else %>
-			<p><%= link_to "Edit Item", "/merchant_employee/merchants/#{@merchant.id}/items/#{@item.id}/edit" %></p>
+			<p><%= link_to "Edit Item", edit_merchant_employee_merchant_item_path(@merchant.id, @item.id) %></p>
       <%= link_to "Add Review", "/items/#{@item.id}/reviews/new" %>
       <%= button_to "Add To Cart", "/cart/#{@item.id}", method: :post %>
 			<% end %>

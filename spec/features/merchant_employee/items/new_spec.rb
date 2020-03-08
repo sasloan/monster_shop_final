@@ -11,14 +11,14 @@ RSpec.describe "As a Merchant Employee" do
     end
 
     it 'I see a link to add a new item for that merchant' do
-      visit "/merchant_employee/merchants/#{@brian.id}/items"
+			visit merchant_employee_merchant_items_path(@merchant.id, @brian.id)
 
       expect(page).to have_link "Add New Item"
     end
 
     it 'I can add a new item by filling out a form' do
 
-			visit "/merchant_employee/merchants/#{@brian.id}/items"
+			visit merchant_employee_merchant_items_path(@brian.id)
 
       name = "Chamois Buttr"
       price = 18
@@ -29,7 +29,7 @@ RSpec.describe "As a Merchant Employee" do
       click_on "Add New Item"
 
       expect(page).to have_link(@brian.name)
-      expect(current_path).to eq("/merchant_employee/merchants/#{@brian.id}/items/new")
+      expect(current_path).to eq(new_merchant_employee_merchant_item_path(@merchant.id, @brian.id))
       fill_in :name, with: name
       fill_in :price, with: price
       fill_in :description, with: description
@@ -40,7 +40,7 @@ RSpec.describe "As a Merchant Employee" do
 
       new_item = Item.last
 
-      expect(current_path).to eq("/merchant_employee/merchants/#{@brian.id}/items")
+      expect(current_path).to eq(merchant_employee_merchant_items_path(@brian.id))
       expect(new_item.name).to eq(name)
       expect(new_item.price).to eq(price)
       expect(new_item.description).to eq(description)
@@ -58,7 +58,7 @@ RSpec.describe "As a Merchant Employee" do
 
     it 'I get an alert if I dont fully fill out the form' do
 
-			visit "/merchant_employee/merchants/#{@brian.id}/items"
+			visit merchant_employee_merchant_items_path(@brian.id)
 
       name = ""
       price = 18
