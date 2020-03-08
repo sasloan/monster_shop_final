@@ -18,7 +18,7 @@ class OrdersController <ApplicationController
       end
       session.delete(:cart)
       flash[:notice] = "Your order was created as is currently pending"
-      redirect_to "/user/profile/orders"
+      redirect_to user_profile_orders_path(current_user.id)
     else
       flash[:notice] = "Please complete address form to create an order."
       render :new

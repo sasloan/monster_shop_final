@@ -108,7 +108,7 @@ RSpec.describe 'As a User' do
 
       click_button "Create Order"
 
-      expect(current_path).to eq('/user/profile/orders')
+      expect(current_path).to eq(user_profile_orders_path(@user.id))
     end
 
     it 'I can not create order if info not filled out' do

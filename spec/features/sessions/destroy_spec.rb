@@ -10,9 +10,9 @@ RSpec.describe 'As a User' do
 
 		it 'When I click the link I am returned to the welcome page and I am logged out of my session' do
 
-			visit '/user/profile'
+			visit user_profile_path(@user.id)
 
-			expect(current_path).to eq("/user/profile")
+			expect(current_path).to eq(user_profile_path(@user.id))
 			expect(page).to have_link("Log Out")
 
 			click_on 'Log Out'

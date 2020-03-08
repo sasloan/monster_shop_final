@@ -117,7 +117,7 @@ RSpec.describe 'As a User' do
 
 				click_on "Create Order"
 
-				expect(current_path).to eq("/user/profile/orders")
+				expect(current_path).to eq(user_profile_orders_path(user.id))
 
 				expect(page).to have_content("Your order was created as is currently pending")
 			end

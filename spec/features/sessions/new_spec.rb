@@ -27,7 +27,7 @@ RSpec.describe 'As a User' do
         click_on 'Log In'
       end
 
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(@user.id))
       expect(page).to have_content("#{@user.name}, has been successfully logged in!")
     end
 
@@ -48,7 +48,7 @@ RSpec.describe 'As a User' do
       end
 
       visit new_session_path
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(@user.id))
 
       expect(page).to have_content("You are already logged in as User, to log out please select 'Log Out' at the top of your page.")
     end

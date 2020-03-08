@@ -43,9 +43,10 @@ Rails.application.routes.draw do
 	patch '/cart/:item_id/:increment_decrement', to: 'cart#increment_decrement'
 
 	# Orders
-  get '/orders/new', to: 'orders#new'
-  post '/orders', to: 'orders#create'
-  get '/orders/:id', to: 'orders#show'
+	resources :orders, only: [:new, :create, :show]
+  # get '/orders/new', to: 'orders#new'
+  # post '/orders', to: 'orders#create'
+  # get '/orders/:id', to: 'orders#show'
 
 	# Registration
 	resources :users, only: [:new, :create]
@@ -54,13 +55,19 @@ Rails.application.routes.draw do
 
 	# User
   namespace :user do
-    get '/profile/edit', to: 'profile#edit'
-    patch '/profile', to: 'profile#update'
-    get '/profile', to: 'profile#show'
-    get '/profile/edit_password', to: 'profile#edit_password'
-    get '/profile/orders', to: 'profile/orders#index'
-    get '/profile/orders/:id', to: 'profile/orders#show'
-    patch '/profile/orders/:id', to: 'profile/orders#cancel'
+		get '/profile/edit_password', to: 'profile#edit_password'
+		resources :profile, only: [:edit, :update, :show, :edit_password] do
+			resources :orders, only: [:index, :show]
+		end
+		patch '/orders/:id', to: 'orders#cancel'
+
+    # get '/profile/edit', to: 'profile#edit'
+    # patch '/profile', to: 'profile#update'
+    # get '/profile', to: 'profile#show'
+    # get '/profile/edit_password', to: 'profile#edit_password'
+    # get '/profile/orders', to: 'profile/orders#index'
+    # get '/profile/orders/:id', to: 'profile/orders#show'
+    # patch '/profile/orders/:id', to: 'profile/orders#cancel'
   end
 
 	# Merchant Employee

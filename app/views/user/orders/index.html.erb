@@ -12,7 +12,7 @@
     </tr>
 
     <tr id="order-<%= order.id %>">
-      <td><p><%=link_to order.id, "/user/profile/orders/#{order.id}"%></p></td>
+      <td><p><%=link_to order.id, user_profile_order_path(current_user.id, order.id)%></p></td>
       <td><p><%= order.created_at.to_date %></p></td>
       <td><p><%= order.updated_at.to_date %></p></td>
       <td><p><%= order.status %></p></td>
