@@ -13,13 +13,13 @@ RSpec.describe 'As a User' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user)
 
-      visit item_path(@paper)
+      visit "/items/#{@paper.id}"
       click_on 'Add To Cart'
-      visit item_path(@paper)
+      visit "/items/#{@paper.id}"
       click_on 'Add To Cart'
-      visit item_path(@tire)
+      visit "/items/#{@tire.id}"
       click_on 'Add To Cart'
-      visit item_path(@pencil)
+      visit "/items/#{@pencil.id}"
       click_on 'Add To Cart'
 
       visit '/cart'
@@ -39,7 +39,7 @@ RSpec.describe 'As a User' do
 
       click_button 'Create Order'
 
-      visit '/user/profile'
+      visit user_profile_path(@user.id)
 
       within '#user_buttons' do
         click_on 'My Orders'
@@ -49,7 +49,7 @@ RSpec.describe 'As a User' do
     it 'I can see individual orders on profile orders show page' do
       new_order = Order.last
 
-      visit "/user/profile/orders/#{new_order.id}"
+      visit user_profile_order_path(@user.id, new_order.id)
 
       within '#order_headers' do
         expect(page).to have_content('Order ID')
@@ -63,7 +63,7 @@ RSpec.describe 'As a User' do
     it 'I can see information under each item' do
       new_order = Order.last
 
-      visit "/user/profile/orders/#{new_order.id}"
+      visit user_profile_order_path(@user.id, new_order.id)
 
       expect(page).to have_content(new_order.id)
       expect(page).to have_content(new_order.created_at.to_date)
@@ -73,17 +73,17 @@ RSpec.describe 'As a User' do
     end
 
 		it 'I can see a link called My Orders' do
-      visit '/user/profile'
+      visit user_profile_path(@user.id)
 
       within '#user_buttons' do
         click_on 'My Orders'
       end
 
-      expect(current_path).to eq('/user/profile/orders')
+      expect(current_path).to eq(user_profile_orders_path(@user.id))
     end
 
     it 'I can see index of orders from profile page' do
-      visit '/user/profile'
+      visit user_profile_path(@user.id)
 
       within '#user_buttons' do
         click_on 'My Orders'
@@ -111,7 +111,7 @@ RSpec.describe 'As a User' do
     end
 
     it 'I can click the order number and be taken to an order show page' do
-      visit '/user/profile'
+      visit user_profile_path(@user.id)
 
       within '#user_buttons' do
         click_on 'My Orders'
@@ -123,7 +123,7 @@ RSpec.describe 'As a User' do
         click_on "#{new_order.id}"
       end
 
-      expect(current_path).to eq("/user/profile/orders/#{new_order.id}")
+      expect(current_path).to eq(user_profile_order_path(@user.id, new_order.id))
     end
 
     it 'I can see packaged instead of pending when items have been fulfilled' do
@@ -131,7 +131,7 @@ RSpec.describe 'As a User' do
 
       new_order.update(status: 1)
 
-      visit '/user/profile'
+      visit user_profile_path(@user.id)
 
       within '#user_buttons' do
         click_on 'My Orders'
@@ -155,7 +155,7 @@ RSpec.describe 'As a User' do
 			@order_1 = @user1.orders.create!(name: @user1.name, address: 'address', city: 'city', state: 'state', zip: 12345)
 			@order_1.item_orders.create!(item: @tire, price: @tire.price, quantity: 2)
 
-			visit '/user/profile'
+			visit user_profile_path(@user1.id)
 
 			within '#user_buttons' do
 				click_on 'My Orders'
@@ -163,25 +163,25 @@ RSpec.describe 'As a User' do
 		end
 
 		it 'can see a cancel button on show page' do
-      visit "/user/profile/orders/#{@order_1.id}"
-      
+      visit user_profile_order_path(@user1.id, @order_1.id)
+
       @order_1.item_orders.update(status: 1)
 
 			click_on 'Cancel Order'
 
-			expect(current_path).to eq('/user/profile')
+			expect(current_path).to eq(user_profile_path(@user1.id))
 
 			expect(page).to have_content('Order Cancelled')
 
-			visit "/user/profile/orders/#{@order_1.id}"
+			visit user_profile_order_path(@user1.id, @order_1.id)
 
 			expect(page).to have_content('cancelled')
 
-			visit items_path
+			visit '/items'
 
 			within "#item-#{@tire.id}" do
 				expect(page).to have_content('Inventory: 14')
 			end
-    end    
+    end
 	end
 end

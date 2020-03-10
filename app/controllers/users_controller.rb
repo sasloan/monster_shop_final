@@ -7,7 +7,7 @@ class UsersController < ApplicationController
     new_user = User.new(user_params)
 
     if new_user.save
-      redirect_to '/user/profile'
+      redirect_to user_profile_path(new_user.id)
       session[:user_id] = new_user.id
       flash[:notice] = 'You have successfully created a user.'
     else

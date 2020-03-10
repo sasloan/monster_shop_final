@@ -4,18 +4,18 @@ RSpec.describe 'As a visitor' do
   describe 'I visit the Welcome page and see.' do
     it 'has a link to register' do
 
-      visit merchants_path
+      visit '/merchants'
 
       within 'nav' do
         click_on 'Register'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(new_user_path)
     end
 
     it 'I can fill in info about a user' do
 
-      visit '/register'
+      visit new_user_path
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'
@@ -30,13 +30,13 @@ RSpec.describe 'As a visitor' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(User.last.id))
       expect(page).to have_content('You have successfully created a user.')
     end
 
     it 'I cannot create a user without all information' do
 
-      visit '/register'
+      visit new_user_path
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'
@@ -48,19 +48,19 @@ RSpec.describe 'As a visitor' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(users_path)
       expect(page).to have_content("City can't be blank, State can't be blank")
     end
 
     it 'I can save entries for an already entered email' do
 
-      visit merchants_path
+      visit '/merchants'
 
       within 'nav' do
         click_on 'Register'
       end
 
-      expect(current_path).to eq('/register')
+      expect(current_path).to eq(new_user_path)
 
       within '#new_user_form' do
         fill_in :name, with: 'Oscar'

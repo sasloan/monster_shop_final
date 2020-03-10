@@ -7,7 +7,7 @@ RSpec.describe 'As a User' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
 
-      visit '/user/profile'
+      visit user_profile_path(@user1.id)
     end
 
     it 'can click a link to edit a password' do
@@ -23,6 +23,8 @@ RSpec.describe 'As a User' do
         click_on 'Change Password'
       end
 
+			expect(current_path).to eq('/user/profile/edit_password')
+
       within "#new_password" do
         fill_in :password,	with: "2"
         fill_in :password_confirmation,	with: "2"
@@ -30,7 +32,7 @@ RSpec.describe 'As a User' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(@user1.id))
       expect(page).to have_content('Successfully updated password.')
     end
   end

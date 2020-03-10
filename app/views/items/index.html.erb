@@ -1,5 +1,5 @@
 <% if @merchant %>
-  <h1><%= link_to @merchant.name, merchant_path(@merchant)%><span> Items</span></h1>
+  <h1><%= link_to @merchant.name, "/merchants/#{@merchant.id}"%><span> Items</span></h1>
   <p align="center"><%= link_to "Add New Item", "/merchants/#{@merchant.id}/items/new" %></p>
 <% else %>
   <h1>All Items</h1>
@@ -21,10 +21,10 @@
   <% @items.each do |item| %>
   <% if item.active? %>
     <section class = "grid-item" id= 'item-<%=item.id%>'>
-      <h2> <%=link_to item.name, item_path(item) %> </h2>
+      <h2> <%=link_to item.name, '/items/:id' %> </h2>
       <p>Sold by: <%=link_to item.merchant.name, "/merchants/#{item.merchant.id}" %></p>
       <section id= 'image-<%= item.id %>'>
-      <p><%=link_to image_tag(item.image), item_path(item) %></p>
+      <p><%=link_to image_tag(item.image), "/items/#{item.id}" %></p>
       </section>
       <p> <%= item.description unless @merchant%> </p>
       <p>Price: <%=number_to_currency(item.price) %> </p>

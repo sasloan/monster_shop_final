@@ -10,11 +10,11 @@ RSpec.describe 'As a User' do
         @paper = @mike.items.create!(name: "Lined Paper", description: "Great for writing on!", price: 20, image: "https://cdn.vertex42.com/WordTemplates/images/printable-lined-paper-wide-ruled.png", inventory: 25)
         @pencil = @mike.items.create!(name: "Yellow Pencil", description: "You can write on paper with it!", price: 2, image: "https://images-na.ssl-images-amazon.com/images/I/31BlVr01izL._SX425_.jpg", inventory: 100)
 
-        visit item_path(@paper)
+        visit "/items/#{@paper.id}"
         click_on "Add To Cart"
-        visit item_path(@tire)
+        visit "/items/#{@tire.id}"
         click_on "Add To Cart"
-        visit item_path(@pencil)
+        visit "/items/#{@pencil.id}"
         click_on "Add To Cart"
         @items_in_cart = [@paper,@tire,@pencil]
 
@@ -50,7 +50,7 @@ RSpec.describe 'As a User' do
 
         expect(page).to have_content("Total: $122")
 
-        visit item_path(@pencil)
+        visit "/items/#{@pencil.id}"
         click_on "Add To Cart"
 
         visit '/cart'
@@ -89,13 +89,13 @@ RSpec.describe 'As a User' do
 
 				click_link "register"
 
-				expect(current_path).to eq('/register')
+				expect(current_path).to eq(new_user_path)
 
 				visit '/cart'
 
 				click_link "log in"
 
-				expect(current_path).to eq('/login')
+				expect(current_path).to eq(new_session_path)
 			end
 
 			it 'If logged in as a user I can checkout' do
@@ -117,7 +117,7 @@ RSpec.describe 'As a User' do
 
 				click_on "Create Order"
 
-				expect(current_path).to eq("/user/profile/orders")
+				expect(current_path).to eq(user_profile_orders_path(user.id))
 
 				expect(page).to have_content("Your order was created as is currently pending")
 			end

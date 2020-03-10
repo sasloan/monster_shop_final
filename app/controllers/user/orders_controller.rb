@@ -1,4 +1,4 @@
-class User::Profile::OrdersController < User::BaseController
+class User::OrdersController < User::BaseController
   def index
     @orders = Order.where(user: current_user)
   end
@@ -12,6 +12,6 @@ class User::Profile::OrdersController < User::BaseController
     order.cancel
 
     flash[:notice] = 'Order Cancelled'
-    redirect_to user_profile_path
+    redirect_to user_profile_path(current_user.id)
   end
 end

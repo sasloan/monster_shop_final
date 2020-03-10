@@ -74,8 +74,8 @@ RSpec.describe 'As a Merchant Employee' do
 
 			click_on "Inventory"
 
-			expect(current_path).to eq("/merchant_employee/merchants/#{@megs_shop.id}/items")
-			expect(current_path).not_to eq("/merchants/#{@brians_shop.id}/items")
+			expect(current_path).to eq(merchant_employee_merchant_items_path(@meg.id, @megs_shop.id))
+			expect(current_path).not_to eq(merchant_employee_merchant_items_path(@brians_shop.id))
 		end
 
 		it 'I see a button that takes me to my bulk discounts' do

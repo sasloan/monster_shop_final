@@ -16,7 +16,7 @@
         <p align = "center">
           <span>
             <img align = "center" id="cart-image" src= <%= item.image %>>
-            <%=link_to item.name, item_path(item) %>
+            <%=link_to item.name, '/items/:id' %>
           </span>
         </p>
       </td>
@@ -46,10 +46,10 @@
   <p><%= link_to "Empty Cart", "/cart", method: :delete %></p>
 	<% if !current_user %>
 		<p> You need to register or login to checkout </p>
-		<p><%= link_to "log in", "/login" %></p>
-		<p><%= link_to "register", "/register" %></p>
+		<p><%= link_to "log in", new_session_path %></p>
+		<p><%= link_to "register", new_user_path %></p>
 	<% else %>
-  		<p><%= link_to "Checkout", "/orders/new", method: :get %></p>
+  		<p><%= link_to "Checkout", new_order_path, method: :get %></p>
 	<% end %>
 <% else %>
   <h3 align= "center">Cart is currently empty</h3>

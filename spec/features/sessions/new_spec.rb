@@ -7,15 +7,15 @@ RSpec.describe 'As a User' do
     end
 
     it 'when I click that link I am taken to a log in form to log in' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link('Log In')
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content('Email')
       expect(page).to have_content('Password')
@@ -27,18 +27,18 @@ RSpec.describe 'As a User' do
         click_on 'Log In'
       end
 
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(@user.id))
       expect(page).to have_content("#{@user.name}, has been successfully logged in!")
     end
 
     it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the profile page' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       within '#log_in_form' do
         fill_in :email, with: @user.email
@@ -47,22 +47,22 @@ RSpec.describe 'As a User' do
         click_on 'Log In'
       end
 
-      visit '/login'
-      expect(current_path).to eq('/user/profile')
+      visit new_session_path
+      expect(current_path).to eq(user_profile_path(@user.id))
 
       expect(page).to have_content("You are already logged in as User, to log out please select 'Log Out' at the top of your page.")
     end
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link('Log In')
 
       click_on 'Log In'
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content('Email')
       expect(page).to have_content('Password')
@@ -75,7 +75,6 @@ RSpec.describe 'As a User' do
       end
 
       expect(page).to have_content('Your Log in attempt failed, Wrong email or password')
-      expect(current_path).to eq('/login')
     end
   end
 end
@@ -89,15 +88,15 @@ describe 'As a Merchant' do
 
     it 'when I click that link I am taken to a log in form to log in' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -114,13 +113,13 @@ describe 'As a Merchant' do
 
 		it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the dahsboard page' do
 
-  		visit '/welcome'
+  		visit root_path
 
-  		expect(current_path).to eq('/welcome')
+  		expect(current_path).to eq(root_path)
 
   		click_on "Log In"
 
-  		expect(current_path).to eq('/login')
+  		expect(current_path).to eq(new_session_path)
 
   		within '#log_in_form' do
     		fill_in :email, with: @merchant.email
@@ -129,7 +128,7 @@ describe 'As a Merchant' do
     		click_on 'Log In'
   		end
 
-      visit '/login'
+      visit new_session_path
       expect(current_path).to eq("/merchant_employee/dashboard")
 
   		expect(page).to have_content("You are already logged in as Merchant, to log out please select 'Log Out' at the top of your page.")
@@ -137,15 +136,15 @@ describe 'As a Merchant' do
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -158,7 +157,6 @@ describe 'As a Merchant' do
       end
 
       expect(page).to have_content("Your Log in attempt failed, Wrong email or password")
-      expect(current_path).to eq("/login")
     end
   end
 end
@@ -171,15 +169,15 @@ describe 'As a Admin' do
 
     it 'when I click that link I am taken to a log in form to log in' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -195,13 +193,13 @@ describe 'As a Admin' do
     end
 
     it 'If I click on the log in button when I am already logged in then I recive a flash message and am sent back to the dashboard page' do
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq('/welcome')
+      expect(current_path).to eq(root_path)
 
       click_on "Log In"
 
-      expect(current_path).to eq('/login')
+      expect(current_path).to eq(new_session_path)
 
       within '#log_in_form' do
         fill_in :email, with: @admin.email
@@ -210,7 +208,7 @@ describe 'As a Admin' do
         click_on 'Log In'
       end
 
-      visit '/login'
+      visit new_session_path
 
       expect(current_path).to eq("/admin/dashboard")
 
@@ -219,15 +217,15 @@ describe 'As a Admin' do
 
     it 'If I enter the wrong infromation then I am redirected back to the form with a error message' do
 
-      visit '/welcome'
+      visit root_path
 
-      expect(current_path).to eq("/welcome")
+      expect(current_path).to eq(root_path)
 
       expect(page).to have_link("Log In")
 
       click_on "Log In"
 
-      expect(current_path).to eq("/login")
+      expect(current_path).to eq(new_session_path)
 
       expect(page).to have_content("Email")
       expect(page).to have_content("Password")
@@ -240,7 +238,6 @@ describe 'As a Admin' do
       end
 
       expect(page).to have_content("Your Log in attempt failed, Wrong email or password")
-      expect(current_path).to eq("/login")
     end
   end
 end

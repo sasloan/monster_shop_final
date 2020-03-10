@@ -10,17 +10,17 @@
 
   <body>
     <nav class = "topnav">
-	<%= link_to "Home", '/' %>
-      <%= link_to "All Merchants", merchants_path %>
-      <%= link_to "All Items", items_path%>
+	<%= link_to "Home", root_path %>
+      <%= link_to "All Merchants", '/merchants' %>
+      <%= link_to "All Items", '/items'%>
       <%= link_to "Cart: #{cart.total_items}", "/cart" %>
 <<<<<<< HEAD
 	<% if !current_user %>
-	     	<%= link_to "Register", '/register' %>
-		<%= link_to "Login", '/login' %>
+	     	<%= link_to "Register", new_user_path %>
+		<%= link_to "Login", new_session_path %>
 	<% else %>
 		<%= link_to "Profile", user_profile_path %>
-		<%= link_to "Logout", "/logout" %>
+		<%= link_to "Logout", session_path %>
 		<% if current_user.role == "merchant_employee" %>
 			<%= link_to "Merchant Dashboard", merchant_dashboard_path %>
 		<% elsif current_user.role == "admin" %>
@@ -29,9 +29,9 @@
 		<% end %>
 	<% end %>
 =======
-      <%= link_to "Register", '/register' %>
-			<%= link_to "Log In", '/login' %>
-			<%= link_to "Log Out", "/logout", method: :delete %>
+      <%= link_to "Register", new_user_path %>
+			<%= link_to "Log In", new_session_path %>
+			<%= link_to "Log Out", session_path, method: :delete %>
 
 >>>>>>> 718884aff76790492637cf481fb1a7fcbb4f67c9
     </nav>

@@ -1,7 +1,7 @@
 class MerchantEmployee::ItemsController < MerchantEmployee::BaseController
 
 	def index
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 		@items = @merchant.items
 	end
 
@@ -11,14 +11,14 @@ class MerchantEmployee::ItemsController < MerchantEmployee::BaseController
 	end
 
 	def new
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 	end
 
 	def create
-		@merchant = Merchant.find(params[:id])
+		@merchant = current_user.merchant
 		@item = @merchant.items.create(item_params)
 		if @item.save
-			redirect_to "/merchant_employee/merchants/#{@merchant.id}/items"
+			redirect_to merchant_employee_merchant_items_path(@merchant.id)
 		else
 			flash[:error] = @item.errors.full_messages.to_sentence
 			render :new
@@ -35,7 +35,7 @@ class MerchantEmployee::ItemsController < MerchantEmployee::BaseController
 		@merchant = @item.merchant
     @item.update(item_params)
     if @item.save
-      redirect_to "/merchant_employee/merchants/#{@merchant.id}/items/#{@item.id}"
+      redirect_to merchant_employee_merchant_item_path(@merchant.id, @item.id)
     else
       flash[:error] = @item.errors.full_messages.to_sentence
       render :edit
@@ -48,7 +48,7 @@ class MerchantEmployee::ItemsController < MerchantEmployee::BaseController
     Review.where(item_id: @item.id).destroy_all
     @item.destroy
 		flash[:notice] = "#{@item.name}, has been perminatley removed from inventory!"
-    redirect_to "/merchant_employee/merchants/#{@merchant.id}/items"
+    redirect_to merchant_employee_merchant_items_path(@merchant.id)
   end
 
   private

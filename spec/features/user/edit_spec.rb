@@ -7,7 +7,7 @@ RSpec.describe 'As a User' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@user1)
 
-      visit '/user/profile'
+      visit user_profile_path(@user1.id)
     end
 
     it 'It allows me to edit my profile' do
@@ -15,7 +15,7 @@ RSpec.describe 'As a User' do
         click_on 'Edit'
       end
 
-      expect(current_path).to eq('/user/profile/edit')
+      expect(current_path).to eq(edit_user_profile_path(@user1.id))
 
       within "#user_edit_form" do
         expect(find_field(:name).value).to eq('Steve')
@@ -37,7 +37,7 @@ RSpec.describe 'As a User' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/user/profile')
+      expect(current_path).to eq(user_profile_path(@user1.id))
       expect(page).to have_content('Name: Penelope')
       expect(page).to have_content('Profile information updated successfully!')
     end
@@ -55,7 +55,7 @@ RSpec.describe 'As a User' do
         click_on 'Submit'
       end
 
-      expect(current_path).to eq('/user/profile/edit')
+      expect(current_path).to eq(edit_user_profile_path(@user1.id))
       expect(page).to have_content("Name can't be blank")
     end
   end

@@ -9,22 +9,22 @@ RSpec.describe 'As a User' do
     end
 
     it "I see a link to add this item to my cart" do
-      visit item_path(@paper)
+      visit "/items/#{@paper.id}"
       expect(page).to have_button("Add To Cart")
     end
 
     it "I can add this item to my cart" do
-      visit item_path(@paper)
+      visit "/items/#{@paper.id}"
       click_on "Add To Cart"
 
       expect(page).to have_content("#{@paper.name} was successfully added to your cart")
-      expect(current_path).to eq(items_path)
+      expect(current_path).to eq('/items')
 
       within 'nav' do
         expect(page).to have_content("Cart: 1")
       end
 
-      visit item_path(@pencil)
+      visit "/items/#{@paper.id}"
       click_on "Add To Cart"
 
       within 'nav' do

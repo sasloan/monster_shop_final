@@ -10,7 +10,7 @@ RSpec.describe 'As a User' do
 
     it 'can see all of my information' do
 
-      visit '/user/profile'
+      visit user_profile_path(@user1.id)
 
       within '#user_profile_info' do
         expect(page).to have_content('Name: Steve')

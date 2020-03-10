@@ -1,6 +1,6 @@
 <h2>Edit Profile Information</h2>
 <section id='user_edit_form'>
-  <%= form_tag '/user/profile', method: :patch do %>
+  <%= form_tag user_profile_path(@user.id), method: :patch do %>
     <%= label_tag :name %>
     <%= text_field_tag :name, @user.name %>
 

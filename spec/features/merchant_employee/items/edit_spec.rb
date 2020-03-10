@@ -10,13 +10,13 @@ RSpec.describe "As a Merchant Employee" do
 
 				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
 
-        visit "/merchant_employee/merchants/#{@meg.id}/items/#{@tire.id}"
+        visit merchant_employee_merchant_item_path(@meg.id, @tire.id)
 
         expect(page).to have_link("Edit Item")
 
         click_on "Edit Item"
 
-        expect(current_path).to eq("/merchant_employee/merchants/#{@meg.id}/items/#{@tire.id}/edit")
+        expect(current_path).to eq(edit_merchant_employee_merchant_item_path(@meg.id, @tire.id))
         expect(page).to have_link("Gatorskins")
         expect(find_field('Name').value).to eq "Gatorskins"
         expect(find_field('Price').value).to eq '$100.00'
@@ -32,7 +32,7 @@ RSpec.describe "As a Merchant Employee" do
 
 				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
 
-        visit "/merchant_employee/merchants/#{@meg.id}/items/#{@tire.id}"
+        visit merchant_employee_merchant_item_path(@meg.id, @tire.id)
 
         click_on "Edit Item"
 
@@ -44,7 +44,7 @@ RSpec.describe "As a Merchant Employee" do
 
         click_on "Update Item"
 
-        expect(current_path).to eq("/merchant_employee/merchants/#{@meg.id}/items/#{@tire.id}")
+        expect(current_path).to eq(merchant_employee_merchant_item_path(@meg.id, @tire.id))
         expect(page).to have_content("GatorSkins")
         expect(page).to_not have_content("Gatorskins")
         expect(page).to have_content("Price: $110")
@@ -62,7 +62,7 @@ RSpec.describe "As a Merchant Employee" do
 
 				allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
 
-				visit "/merchant_employee/merchants/#{@meg.id}/items/#{@tire.id}"
+				visit merchant_employee_merchant_item_path(@meg.id, @tire.id)
 
         click_on "Edit Item"
 

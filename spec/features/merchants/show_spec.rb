@@ -8,7 +8,7 @@ RSpec.describe 'As a User' do
 
 			allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(@merchant)
 
-			visit merchant_path(@bike_shop)
+			visit "/merchants/#{@bike_shop.id}"
     end
 
     it 'I can see a merchants name, address, city, state, zip' do
@@ -47,7 +47,7 @@ RSpec.describe 'As a User' do
 		end
 
 		it 'I can see a merchants statistics' do
-			visit merchant_path(@brian)
+			visit "/merchants/#{@brian.id}"
 
 			within ".merchant-stats" do
 				expect(page).to have_content("Number of Items: 2")
@@ -70,21 +70,21 @@ RSpec.describe 'As a User' do
 
     it "I can delete a merchant" do
 
-      visit merchant_path(@bike_shop)
+      visit "/merchants/#{@bike_shop.id}"
 
       click_on "Delete Merchant"
 
-      expect(current_path).to eq(merchants_path)
+      expect(current_path).to eq('/merchants')
       expect(page).to_not have_content("Brian's Bike Shop")
     end
 
     it "I can delete a merchant that has items" do
 
-      visit merchant_path(@bike_shop)
+      visit "/merchants/#{@bike_shop.id}"
 
       click_on "Delete Merchant"
 
-      expect(current_path).to eq(merchants_path)
+      expect(current_path).to eq('/merchants')
       expect(page).to_not have_content("Brian's Bike Shop")
     end
 
@@ -101,13 +101,13 @@ RSpec.describe 'As a User' do
 
       allow_any_instance_of(ApplicationController).to receive(:current_user).and_return(user)
 
-      visit item_path(paper)
+      visit "/items/#{paper.id}"
       click_on "Add To Cart"
-      visit item_path(paper)
+      visit "/items/#{paper.id}"
       click_on "Add To Cart"
-      visit item_path(tire)
+      visit "/items/#{tire.id}"
       click_on "Add To Cart"
-      visit item_path(pencil)
+      visit "/items/#{pencil.id}"
       click_on "Add To Cart"
 
       visit "/cart"
@@ -127,8 +127,8 @@ RSpec.describe 'As a User' do
 
       click_button "Create Order"
 
-      visit merchants_path(meg)
-      
+      visit "/merchants/#{meg.id}"
+
       expect(page).to_not have_link("Delete Merchant")
     end
   end

@@ -10,14 +10,14 @@ RSpec.describe 'As a User' do
 
 		it 'When I click the link I am returned to the welcome page and I am logged out of my session' do
 
-			visit '/user/profile'
+			visit user_profile_path(@user.id)
 
-			expect(current_path).to eq("/user/profile")
+			expect(current_path).to eq(user_profile_path(@user.id))
 			expect(page).to have_link("Log Out")
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end
@@ -41,7 +41,7 @@ describe 'As a Merchant' do
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end
@@ -64,7 +64,7 @@ describe 'As a Admin' do
 
 			click_on 'Log Out'
 
-			expect(current_path).to eq("/welcome")
+			expect(current_path).to eq(root_path)
 			expect(page).to have_content("You have been successfully logged out!!")
 		end
 	end

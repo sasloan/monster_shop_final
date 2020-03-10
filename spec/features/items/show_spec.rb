@@ -40,7 +40,7 @@ RSpec.describe 'As a Visitor' do
 	  end
 
 	  it 'shows nothing about reviews if there are no reviews' do
-	    visit item_path(@chain)
+	    visit "/items/#{@chain.id}"
 
 	    within ".review-stats" do
 	      expect(page).to have_content("This item has not yet been reviewed.")
